@@ -87,16 +87,14 @@ class GameApiClient {
     }
 
     fun getGameDetails(id: String?, callback: (Game?, Throwable?) -> Unit) {
-        apiService2.getGameDetails(id, apiKey = API_KEY).enqueue(object : Callback<ApiGameResponse> {
+        apiService1.getGameDetails(id, apiKey = API_KEY).enqueue(object : Callback<ApiGameResponse> {
             override fun onResponse(call: Call<ApiGameResponse>, response: Response<ApiGameResponse>) {
                 if (response.isSuccessful) {
                     Log.d("gameDetails", "api response success: "+ response)
                     val apiGameDetailsResponse = response.body()
                     Log.d("gameDetails", "api response body: "+ apiGameDetailsResponse)
-                    /*val game = apiGameDetailsResponse?.appid?.get(id)?.data?.let { GameObj ->
-                        GameObj?.toGame()
-                    }*/
-                    //callback(game as Game?,null)
+                    val game = apiGameDetailsResponse?.toGame()
+                    callback(game,null)
                 } else {
                     Log.d("gameDetails", "api response fail: "+ response)
                     callback(null, Throwable(response.message()))
@@ -114,9 +112,21 @@ class GameApiClient {
             Game(
                 id = this.id ?: 0,
                 name = this.name ?: "",
-                short_description = this.short_description ?: "",
+                description = this.description ?: "",
                 background_image = this.background_image ?: "",
-                genres=this.genres ?: null
+                rating=this.rating ?: null
+            )
+        } else {
+            null
+        }
+    }
+
+    private fun ApiGameResponse.toGame(): Game? {
+        return if (this.id != null) {
+            Game(
+                id = this.id ?: 0,
+                description = this.description ?: "",
+                rating=this.rating ?: null
             )
         } else {
             null

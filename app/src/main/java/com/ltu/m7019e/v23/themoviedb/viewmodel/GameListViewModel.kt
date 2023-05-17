@@ -29,16 +29,13 @@ class GameListViewModel(application: Application) : AndroidViewModel(application
 
     init {
         getGamesApiCall { gameList ->
-            var gameList = gameList?.filter { !it.name.equals("")}
-            Log.d("game_list", "game list after filter: " + gameList)
 
             gameList?.forEach { gameInList ->
                 getGamesDetailsApiCall(gameInList.id) { game ->
 
                     if (game != null) {
                         Log.d("game_list_details", "game details b4: " + gameInList)
-                        //gameInList.short_description = game.short_description
-                        //gameInList.header_image = game.header_image
+                        gameInList.description = game.description
                         //gameInList.genres = game.genres
                         Log.d("game_list_details", "game details after: " + gameInList)
                     }

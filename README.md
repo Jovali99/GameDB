@@ -1,2 +1,2 @@
-# BibDB
-An android book database application
+# GameDB
+An android app that displays games 

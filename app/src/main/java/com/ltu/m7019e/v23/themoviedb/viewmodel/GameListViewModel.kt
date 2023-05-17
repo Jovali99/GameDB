@@ -29,23 +29,22 @@ class GameListViewModel(application: Application) : AndroidViewModel(application
 
     init {
         getGamesApiCall { gameList ->
-            Log.d("game_list", "game list after api: " + gameList)
-            val gameList = gameList?.filter { !it.name.equals("")}
+            var gameList = gameList?.filter { !it.name.equals("")}
             Log.d("game_list", "game list after filter: " + gameList)
-            //gameList.forEach { gameInList ->
-                /*getGamesDetailsApiCall(gameInList.id) { game ->
-                    if (game != null) {
-                        game.forEach { gameDetailList ->
-                            gameInList.description = gameDetailList.description
-                            Log.d(
-                                "game_details",
-                                "Inside game detail api call: " + gameInList.description
-                            )
-                        }
-                    }
-                }*/
-            //}
 
+            gameList?.forEach { gameInList ->
+                getGamesDetailsApiCall(gameInList.id) { game ->
+
+                    if (game != null) {
+                        Log.d("game_list_details", "game details b4: " + gameInList)
+                        //gameInList.short_description = game.short_description
+                        //gameInList.header_image = game.header_image
+                        //gameInList.genres = game.genres
+                        Log.d("game_list_details", "game details after: " + gameInList)
+                    }
+
+                }
+            }
             _gameList.postValue(gameList)
         }
     }
@@ -63,7 +62,7 @@ class GameListViewModel(application: Application) : AndroidViewModel(application
 
     private fun getGamesApiCall(callback: (List<Game>?) -> Unit) {
         val gameApiClient = GameApiClient()
-        gameApiClient.getGames(intface = "ISteamApps") { gameList, error ->
+        gameApiClient.getGames() { gameList, error ->
             if (error != null ) {
                 Log.d("error_game_list", "game list error : " + error)
             } else if (gameList != null) {
@@ -73,9 +72,9 @@ class GameListViewModel(application: Application) : AndroidViewModel(application
         }
     }
 
-    /*private fun getGamesDetailsApiCall(id: Int?, callback: (List<Game>?) -> Unit) {
+    private fun getGamesDetailsApiCall(id: Int?, callback: (Game?) -> Unit) {
         val gameApiClient = GameApiClient()
-        gameApiClient.getGameDetails(id) { game, error ->
+        gameApiClient.getGameDetails(id.toString()) { game, error ->
             if (error != null ) {
                 Log.d("error_game_details", "game_details error : " + error)
             } else if (game != null) {
@@ -83,7 +82,7 @@ class GameListViewModel(application: Application) : AndroidViewModel(application
                 callback(game)
             }
         }
-    }*/
+    }
 
     fun on_imdb_click(context: Context, popUp: AlertDialog, imdb_link: String) {
         popUp.findViewById<FrameLayout>(R.id.imdb_logo_link)?.setOnClickListener {

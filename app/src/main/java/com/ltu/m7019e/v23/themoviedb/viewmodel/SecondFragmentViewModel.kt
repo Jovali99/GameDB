@@ -82,7 +82,7 @@ class SecondFragmentViewModel (application: Application) : AndroidViewModel(appl
 
     private fun getGamesApiCall(callback: (List<Game>?) -> Unit) {
         val gameApiClient = GameApiClient()
-        gameApiClient.getGames(intface = "ISteamApps") { gameList, error ->
+        gameApiClient.getGames() { gameList, error ->
             if (error != null ) {
                 Log.d("error_gamme_list", "game list error : " + error)
             } else if (gameList != null) {

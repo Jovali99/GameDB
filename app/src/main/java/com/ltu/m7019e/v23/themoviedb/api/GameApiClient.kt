@@ -17,10 +17,19 @@ class GameApiClient {
     private val API_KEY = "625DCAAF27AA89204BCB57F0681D28A5" // steam
     private val SORT = "popular"
 
-    private val apiService: ApiService by lazy {
+    private val apiService1: ApiService by lazy {
         val retrofit = Retrofit.Builder()
             //.baseUrl("https://api.rawg.io/api/")
             .baseUrl("http://api.steampowered.com/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        retrofit.create(ApiService::class.java)
+    }
+
+    private val apiService2: ApiService by lazy {
+        val retrofit = Retrofit.Builder()
+            //.baseUrl("https://api.rawg.io/api/")
+            .baseUrl("http://store.steampowered.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         retrofit.create(ApiService::class.java)
@@ -53,7 +62,7 @@ class GameApiClient {
     }*/
 
     fun getGames(intface: String, apiKey: String =API_KEY, callback: (List<Game>?, Throwable?) -> Unit) {
-        apiService.getGames(intface = "ISteamApps", apiKey = apiKey).enqueue(object : Callback<ApiPopularGamesListResponse> {
+        apiService1.getGames(intface = "ISteamApps", apiKey = apiKey).enqueue(object : Callback<ApiPopularGamesListResponse> {
             override fun onResponse(call: Call<ApiPopularGamesListResponse>, response: Response<ApiPopularGamesListResponse>) {
                 if (response.isSuccessful) {
                     Log.d("gameList_good", "api response: "+ response)
@@ -76,27 +85,29 @@ class GameApiClient {
         })
     }
 
-    /*fun getGameDetails(id: Int?, callback: (List<Game>?, Throwable?) -> Unit) {
-        apiService.getGameDetails(id, apiKey = API_KEY).enqueue(object : Callback<ApiGameResponse> {
+    fun getGameDetails(appid: Int?, callback: (Game?, Throwable?) -> Unit) {
+        apiService2.getGameDetails(appid, apiKey = API_KEY).enqueue(object : Callback<ApiGameResponse> {
             override fun onResponse(call: Call<ApiGameResponse>, response: Response<ApiGameResponse>) {
                 if (response.isSuccessful) {
                     Log.d("gameDetails", "api response: "+ response)
                     val apiGameDetailsResponse = response.body()
                     Log.d("gameDetails", "api response body: "+ apiGameDetailsResponse)
-                    val game = apiGameDetailsResponse?.gameDetails?.map { gameObj ->
-                        gameObj.toGame()
+                    val game = apiGameDetailsResponse?.appid?.data?.let { GameObj ->
+                        GameObj?.toGame()
                     }
                     //Log.d("movie_link", "api response: "+ movie_link)
-                    callback(game as List<Game>?,null)
+                    callback(game as Game?,null)
                 } else {
+                    Log.d("gameDetails", "api response: "+ response)
                     callback(null, Throwable(response.message()))
                 }
             }
             override fun onFailure(call: Call<ApiGameResponse>, t: Throwable) {
+                Log.d("gameDetails", "api response: "+ t)
                 callback(null, t)
             }
         })
-    }*/
+    }
 
     /*
     private fun Genre.toGenre(): Genre? {
@@ -115,9 +126,10 @@ class GameApiClient {
         return if (this.appid != null) {
             Game(
                 appid = this.appid ?: 0,
-                name = this.name ?: ""
-                /*short_description = this.short_description ?: "",
-                header_image = this.header_image ?: ""*/
+                name = this.name ?: "",
+                short_description = this.short_description ?: "",
+                header_image = this.header_image ?: "",
+                genres=this.genres ?: null
             )
         } else {
             null

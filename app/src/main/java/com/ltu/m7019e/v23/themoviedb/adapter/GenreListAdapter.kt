@@ -26,7 +26,7 @@ class GenreListAdapter() : ListAdapter<Genre, GenreListAdapter.ViewHolder>(Genre
         }
 
         fun bind(genre: Genre) {
-            binding.genreName.text = genre.name
+            binding.genreName.text = genre.description
         }
 
         companion object {

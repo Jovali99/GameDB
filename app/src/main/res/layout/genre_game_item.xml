@@ -33,7 +33,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/avatars"/>
-            <!--app:posterImageUrl="@{game.backgroundImage}"-->
+            <!--app:posterImageUrl="@{game.header_image}"-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

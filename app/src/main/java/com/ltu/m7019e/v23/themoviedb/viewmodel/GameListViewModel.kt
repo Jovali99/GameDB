@@ -29,23 +29,26 @@ class GameListViewModel(application: Application) : AndroidViewModel(application
 
     init {
         getGamesApiCall { gameList ->
-            Log.d("game_list", "game list after api: " + gameList)
-            val gameList = gameList?.filter { !it.name.equals("")}
+            var gameList = gameList?.filter { !it.name.equals("")}
             Log.d("game_list", "game list after filter: " + gameList)
-            //gameList.forEach { gameInList ->
-                /*getGamesDetailsApiCall(gameInList.id) { game ->
-                    if (game != null) {
-                        game.forEach { gameDetailList ->
-                            gameInList.description = gameDetailList.description
-                            Log.d(
-                                "game_details",
-                                "Inside game detail api call: " + gameInList.description
-                            )
+
+            gameList = gameList?.drop(15)
+            var i = 0
+            gameList?.forEach { gameInList ->
+                //REMOVE 15 FIRST OBJECTS
+                if (i < 15) {
+                    getGamesDetailsApiCall(gameInList.appid) { game ->
+                        if (game != null) {
+                            Log.d("game_list_details", "game details b4: " + gameInList)
+                            gameInList.short_description = game.short_description
+                            gameInList.header_image = game.header_image
+                            gameInList.genres = game.genres
+                            Log.d("game_list_details", "game details after: " + gameInList)
                         }
                     }
-                }*/
-            //}
-
+                }
+                i++
+            }
             _gameList.postValue(gameList)
         }
     }
@@ -73,7 +76,7 @@ class GameListViewModel(application: Application) : AndroidViewModel(application
         }
     }
 
-    /*private fun getGamesDetailsApiCall(id: Int?, callback: (List<Game>?) -> Unit) {
+    private fun getGamesDetailsApiCall(id: Int?, callback: (Game?) -> Unit) {
         val gameApiClient = GameApiClient()
         gameApiClient.getGameDetails(id) { game, error ->
             if (error != null ) {
@@ -83,7 +86,7 @@ class GameListViewModel(application: Application) : AndroidViewModel(application
                 callback(game)
             }
         }
-    }*/
+    }
 
     fun on_imdb_click(context: Context, popUp: AlertDialog, imdb_link: String) {
         popUp.findViewById<FrameLayout>(R.id.imdb_logo_link)?.setOnClickListener {

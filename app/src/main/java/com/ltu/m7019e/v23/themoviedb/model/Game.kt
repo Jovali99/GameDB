@@ -6,10 +6,12 @@ data class Game(
     @SerializedName("appid")
     val appid: Int? = null,
     @SerializedName("name")
-    val name: String? = null
-    /*@SerializedName("short_description")
+    val name: String? = null,
+    @SerializedName("short_description")
     var short_description: String? = null,
     @SerializedName("header_image")
-    val header_image: String? = null,*/
+    var header_image: String? = null,
+    @SerializedName("genres")
+    var genres: List<Genre>? = null,
 
 )

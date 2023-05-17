@@ -4,10 +4,10 @@ import com.google.gson.annotations.SerializedName
 import com.ltu.m7019e.v23.themoviedb.model.Game
 
 data class ApiGameResponse(
-    @SerializedName("platforms")
-    val gameDetails: List<List<Game>?>? = null  //todo fel
+    val appid: ApiGame
 )
 
-
-
-
+data class ApiGame(
+    val success: Boolean,
+    val data: Game?
+)

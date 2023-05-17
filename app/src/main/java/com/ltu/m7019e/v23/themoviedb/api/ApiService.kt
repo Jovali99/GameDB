@@ -10,9 +10,8 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
-    @GET("{interface}/appdetails{id}")  //Fetch game
+    @GET("appdetails{id}")  //Fetch game
     fun getGameDetails(
-        @Path("interface") intface: String,
         @Path("id") id: Int?,
         @Query("key") apiKey: String
     ): Call<ApiGameResponse>

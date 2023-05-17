@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.ltu.m7019e.v23.themoviedb.MovieListFragment"
+        android:name="com.ltu.m7019e.v23.themoviedb.GameListFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_movie_list">
+        tools:layout="@layout/fragment_game_list">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"

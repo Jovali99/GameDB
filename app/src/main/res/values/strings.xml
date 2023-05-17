@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CinemaDB</string>
+    <string name="app_name">FreeGameDB</string>
     <string name="action_settings">Settings</string>
     <string name="action_genres">Genres</string>
     <string name="action_home">Home</string>

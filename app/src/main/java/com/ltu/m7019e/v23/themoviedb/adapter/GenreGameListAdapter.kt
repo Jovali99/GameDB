@@ -1,28 +1,27 @@
 package com.ltu.m7019e.v23.themoviedb.adapter
 
-import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.ListAdapter
-import com.ltu.m7019e.v23.themoviedb.databinding.GenreMovieItemBinding
-import com.ltu.m7019e.v23.themoviedb.model.Movie
+import com.ltu.m7019e.v23.themoviedb.databinding.GenreGameItemBinding
+import com.ltu.m7019e.v23.themoviedb.model.Game
 
-class GenreMovieListAdapter() : ListAdapter<Movie, GenreMovieListAdapter.ViewHolder>(GenreMovieListDiffCallback()) {
+class GenreGameListAdapter() : ListAdapter<Game, GenreGameListAdapter.ViewHolder>(GenreGameListDiffCallback()) {
 
-    class ViewHolder(private val binding: GenreMovieItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(private val binding: GenreGameItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
 
-        fun bind(movie: Movie) {
-            binding.movie = movie
+        fun bind(game: Game) {
+            binding.game = game
         }
 
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = GenreMovieItemBinding.inflate(layoutInflater, parent, false)
+                val binding = GenreGameItemBinding.inflate(layoutInflater, parent, false)
                 return ViewHolder(binding)
             }
         }
@@ -33,9 +32,9 @@ class GenreMovieListAdapter() : ListAdapter<Movie, GenreMovieListAdapter.ViewHol
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val movie = getItem(position)
-        if (movie != null) {
-            holder.bind(movie)
+        val game = getItem(position)
+        if (game != null) {
+            holder.bind(game)
         }
     }
 
@@ -47,12 +46,12 @@ class GenreMovieListAdapter() : ListAdapter<Movie, GenreMovieListAdapter.ViewHol
 
 
 
-    class GenreMovieListDiffCallback : DiffUtil.ItemCallback<Movie>() {
-        override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
-            return oldItem.id == newItem.id
+    class GenreGameListDiffCallback : DiffUtil.ItemCallback<Game>() {
+        override fun areItemsTheSame(oldItem: Game, newItem: Game): Boolean {
+            return oldItem.appid == newItem.appid
         }
 
-        override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {
+        override fun areContentsTheSame(oldItem: Game, newItem: Game): Boolean {
             return oldItem == newItem
         }
     }

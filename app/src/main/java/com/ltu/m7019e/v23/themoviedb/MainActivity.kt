@@ -5,8 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
-import com.ltu.m7019e.v23.themoviedb.api.MovieApiClient
 
 class MainActivity : AppCompatActivity() {
 

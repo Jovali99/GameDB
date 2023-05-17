@@ -15,14 +15,14 @@ class GenreListAdapter() : ListAdapter<Genre, GenreListAdapter.ViewHolder>(Genre
 
     class ViewHolder(private val binding: GenreItemListBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        private val genreMovieListRV: RecyclerView
-        val genreMovieListAdapter: GenreMovieListAdapter
+        private val genreGameListRV: RecyclerView
+        val genreGameListAdapter: GenreGameListAdapter
         init {
             val context = itemView.context
-            genreMovieListRV = itemView.findViewById(R.id.genre_movie_list_rv)
-            genreMovieListRV?.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            genreMovieListAdapter = GenreMovieListAdapter()
-            genreMovieListRV.adapter = genreMovieListAdapter
+            genreGameListRV = itemView.findViewById(R.id.genre_game_list_rv)
+            genreGameListRV?.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            genreGameListAdapter = GenreGameListAdapter()
+            genreGameListRV.adapter = genreGameListAdapter
         }
 
         fun bind(genre: Genre) {
@@ -45,7 +45,7 @@ class GenreListAdapter() : ListAdapter<Genre, GenreListAdapter.ViewHolder>(Genre
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val genre = getItem(position)
         if (genre != null) {
-            holder.genreMovieListAdapter.submitList(genre.movieList)
+            holder.genreGameListAdapter.submitList(genre.gameList)
             holder.bind(genre)
         }
     }

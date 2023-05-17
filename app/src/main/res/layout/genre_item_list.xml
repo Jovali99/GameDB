@@ -36,7 +36,7 @@
         </androidx.appcompat.widget.Toolbar>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/genre_movie_list_rv"
+            android:id="@+id/genre_game_list_rv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:scrollbars="horizontal"

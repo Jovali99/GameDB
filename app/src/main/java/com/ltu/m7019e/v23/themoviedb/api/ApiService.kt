@@ -1,30 +1,33 @@
 package com.ltu.m7019e.v23.themoviedb.api
 
 import com.ltu.m7019e.v23.themoviedb.api.response.ApiGenreResponse
-import com.ltu.m7019e.v23.themoviedb.api.response.ApiMovieResponse
-import com.ltu.m7019e.v23.themoviedb.api.response.ApiPopularMoviesListResponse
+import com.ltu.m7019e.v23.themoviedb.api.response.ApiGameResponse
+import com.ltu.m7019e.v23.themoviedb.api.response.ApiPopularGamesListResponse
+import com.ltu.m7019e.v23.themoviedb.model.Game
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
-    @GET("movie/{movie_id}")
-    fun getMovieDetails(
-        @Path("movie_id") movieId: Int,
-        @Query("api_key") apiKey: String
-    ): Call<ApiMovieResponse>
+    @GET("{interface}/appdetails{id}")  //Fetch game
+    fun getGameDetails(
+        @Path("interface") intface: String,
+        @Path("id") id: Int?,
+        @Query("key") apiKey: String
+    ): Call<ApiGameResponse>
 
-    @GET("movie/popular")
-    fun getPopularMovies(
-        @Query("page") pages: Int,
-        @Query("api_key") apiKey: String
-    ): Call<ApiPopularMoviesListResponse>
+    //@GET("games")
+    @GET("{interface}/GetAppList/v2")
+    fun getGames(
+        @Path("interface") intface: String,
+        @Query("key") apiKey: String
+    ): Call<ApiPopularGamesListResponse>
 
-    @GET("genre/movie/list")
+    @GET("genres")              //Fetch subjects
     fun getGenres(
-        @Query("language") language: String,
-        @Query("api_key") apiKey: String
+        @Path("subject") subject: String,
+        @Query("key") apiKey: String
     ): Call<ApiGenreResponse>
 
 }

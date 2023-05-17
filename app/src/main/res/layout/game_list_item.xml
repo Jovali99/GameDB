@@ -5,62 +5,63 @@
 
     <data>
         <variable
-            name="movie"
-            type="com.ltu.m7019e.v23.themoviedb.model.Movie" />
+            name="game"
+            type="com.ltu.m7019e.v23.themoviedb.model.Game" />
         <variable
             name="clickListener"
-            type="com.ltu.m7019e.v23.themoviedb.adapter.MovieListClickListener" />
+            type="com.ltu.m7019e.v23.themoviedb.adapter.GameListClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/movie_list_item_cl"
+        android:id="@+id/game_list_item_cl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{ () -> clickListener.onClick(movie)}">
+        android:onClick="@{ () -> clickListener.onClick(game)}">
 
         <ImageView
-            android:id="@+id/movie_poster"
+            android:id="@+id/game_poster"
             android:layout_width="92dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:posterImageUrl="@{movie.poster_path}"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@tools:sample/avatars"/>
+            <!--app:posterImageUrl="@{game.backgroundImage}"-->
+
 
         <TextView
-            android:id="@+id/movie_title"
+            android:id="@+id/game_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="@{movie.title}"
+            android:text="@{game.name}"
             android:textColor="@color/white"
             android:textSize="18sp"
-            app:layout_constraintStart_toEndOf="@+id/movie_poster"
-            app:layout_constraintTop_toTopOf="@+id/movie_poster"
-            tools:text="Movie Title" />
+            app:layout_constraintStart_toEndOf="@+id/game_poster"
+            app:layout_constraintTop_toTopOf="@+id/game_poster"
+            tools:text="game Title" />
 
         <TextView
-            android:id="@+id/movie_release_date"
+            android:id="@+id/game_release_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@{movie.release_date}"
             android:textColor="@color/white"
-            app:layout_constraintStart_toStartOf="@+id/movie_title"
-            app:layout_constraintTop_toBottomOf="@+id/movie_title"
-            tools:text="Movie Release Date" />
+            app:layout_constraintStart_toStartOf="@+id/game_title"
+            app:layout_constraintTop_toBottomOf="@+id/game_title"
+            tools:text="game Release Date" />
 
         <TextView
-            android:id="@+id/movie_overview"
+            android:id="@+id/game_overview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLines="4"
-            android:text="@{movie.overview}"
+
             android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="@+id/movie_poster"
-            app:layout_constraintStart_toStartOf="@+id/movie_title"
-            tools:text="Movie Overview" />
+            app:layout_constraintBottom_toBottomOf="@+id/game_poster"
+            app:layout_constraintStart_toStartOf="@+id/game_title"
+            tools:text="game Overview" />
+            <!--android:text="@{game.description}"-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

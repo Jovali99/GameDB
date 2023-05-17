@@ -1,3 +1,4 @@
+/*
 package com.ltu.m7019e.v23.themoviedb.model
 
 import com.google.gson.annotations.SerializedName
@@ -14,4 +15,4 @@ data class Movie(
         var popularity: Float  = 0f,
         var vote_average: Float = 0f,
         var imdb_link: String
-)
+)*/

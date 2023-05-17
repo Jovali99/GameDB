@@ -13,13 +13,10 @@ import androidx.lifecycle.MutableLiveData
 import com.ltu.m7019e.v23.themoviedb.R
 import com.ltu.m7019e.v23.themoviedb.api.GameApiClient
 import com.ltu.m7019e.v23.themoviedb.model.Game
-import com.ltu.m7019e.v23.themoviedb.model.Genre
 
-class SecondFragmentViewModel (application: Application) : AndroidViewModel(application){
-    private val _gameList = MutableLiveData<List<Game>>()
-    private val _genreList = MutableLiveData<List<Genre>>()
-
-    val gameList: LiveData<List<Game>>
+class GameListViewModel(application: Application) : AndroidViewModel(application) {
+    private val _gameList = MutableLiveData<List<Game>?>()
+    val gameList: LiveData<List<Game>?>
         get() {
             return _gameList
         }
@@ -30,21 +27,12 @@ class SecondFragmentViewModel (application: Application) : AndroidViewModel(appl
             return _navigateToGameDetail
         }
 
-    val genreList: LiveData<List<Genre>>
-        get() {
-            return _genreList
-        }
-
-
-
     init {
-
         getGamesApiCall { gameList ->
-            Log.d("game_-list", "gamelist after api: " + gameList)
-
-            /*gameList.forEach { gameInList ->
-
-                Log.d("game_details", "Before game detail api call: " + gameInList.id)
+            Log.d("game_list", "game list after api: " + gameList)
+            val gameList = gameList?.filter { !it.name.equals("")}
+            Log.d("game_list", "game list after filter: " + gameList)
+            //gameList.forEach { gameInList ->
                 /*getGamesDetailsApiCall(gameInList.id) { game ->
                     if (game != null) {
                         game.forEach { gameDetailList ->
@@ -56,17 +44,9 @@ class SecondFragmentViewModel (application: Application) : AndroidViewModel(appl
                         }
                     }
                 }*/
-            }*/
-            //_gameList.postValue(gameList)
+            //}
 
-
-//            val genreGame = gameList.filter { it.game_genres.contains(genre.id)}
-//            var listOfGenres = mutableListOf<Genre>()
-//            listOfGenres.add(genre)
-//            _genreList.postValue(listOfGenres) todo genres
-
-
-
+            _gameList.postValue(gameList)
         }
     }
 
@@ -80,29 +60,18 @@ class SecondFragmentViewModel (application: Application) : AndroidViewModel(appl
         _navigateToGameDetail.value = null;
     }
 
+
     private fun getGamesApiCall(callback: (List<Game>?) -> Unit) {
         val gameApiClient = GameApiClient()
         gameApiClient.getGames(intface = "ISteamApps") { gameList, error ->
             if (error != null ) {
-                Log.d("error_gamme_list", "game list error : " + error)
+                Log.d("error_game_list", "game list error : " + error)
             } else if (gameList != null) {
                 Log.d("game_list", "add games to list: " + gameList)
                 callback(gameList)
             }
         }
     }
-
-//    private fun getGenresApiCall(callback: (List<Genre>) -> Unit) {
-//        val gameApiClient = GameApiClient()
-//        gameApiClient.getGenres { genreList, error ->
-//            if (error != null ) {
-//                Log.d("error_game_list", "game list error : " + error)
-//            } else if (genreList != null) {
-//                Log.d("getGenres", "add genres to list: " + genreList)
-//                callback(genreList)
-//            }
-//        }
-//    }
 
     /*private fun getGamesDetailsApiCall(id: Int?, callback: (List<Game>?) -> Unit) {
         val gameApiClient = GameApiClient()

@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="movies"
-            type="com.ltu.m7019e.v23.themoviedb.database.Movies" />
+            name="games"
+            type="com.ltu.m7019e.v23.themoviedb.database.Games" />
     </data>
 
     <FrameLayout
@@ -15,7 +15,7 @@
         tools:context=".MainActivity">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/movie_list_rv"
+            android:id="@+id/game_list_rv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="vertical"

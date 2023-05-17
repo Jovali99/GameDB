@@ -1,3 +1,4 @@
+/*
 package com.ltu.m7019e.v23.themoviedb.adapter
 
 import android.view.LayoutInflater
@@ -48,4 +49,4 @@ class MovieListDiffCallback : DiffUtil.ItemCallback<Movie>() {
 
 class MovieListClickListener(val clickListener: (movie: Movie) -> Unit) {
     fun onClick(movie: Movie) = clickListener(movie)
-}
+}*/

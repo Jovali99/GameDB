@@ -26,8 +26,9 @@
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:posterImageUrl="@{game.background_image}"
             tools:srcCompat="@tools:sample/avatars"/>
-            <!--app:posterImageUrl="@{game.header_image}"-->
+            <!--"-->
 
 
         <TextView

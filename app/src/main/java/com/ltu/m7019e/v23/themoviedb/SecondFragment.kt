@@ -79,42 +79,6 @@ class SecondFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        /*
-        val genreLayoutContainer = view.findViewById<LinearLayout>(R.id.genre_layout)
-        val movies = Movies()
-
-        getGenresApiCall { genreList ->
-            var genres = Genres()
-            genres.list = genres.addGenres(genreList)
-
-            Log.d("genre_list", "filled genre list: " + genres.list)
-
-            genres.list.forEach { genre ->
-                val genreItem = LayoutInflater.from(requireContext()).inflate(R.layout.genre_item_list, genreLayoutContainer, false)
-
-                val genreMovies = movies.list.filter { it.movie_genres.contains(genre.second)}   // Filter movies
-                if (genreMovies.isEmpty()) {
-                    // If no movies of the genre exist we remove the genre view
-                    genreLayoutContainer.removeView(genreItem)
-                } else {
-                    genreItem.findViewById<TextView>(R.id.genre_name)?.text = genre.first
-                    genreLayoutContainer.addView(genreItem)
-                }
-
-                val movieListLayoutContainer = genreItem.findViewById<LinearLayout>(R.id.list_of_movies)
-                // Adds all the movies with the corresponding genre to the list_of_movies view
-                genreMovies.forEach { movie ->
-                    val movieItem = DataBindingUtil.inflate<GenreMovieItemBinding>(LayoutInflater.from(requireContext()), R.layout.genre_movie_item, movieListLayoutContainer, false)
-                    movieItem.movie = movie
-                    var imdb_link = movie.imdb_link
-                    // Creates a popup dialogue which will display information as well as a link to imbd
-                    createMovieInfoPopup(movieItem.root, imdb_link)
-
-                    // On click action
-                    movieListLayoutContainer.addView(movieItem.root)
-                }
-            }
-        }*/
 
         view.findViewById<Button>(R.id.button_second).setOnClickListener {
             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)

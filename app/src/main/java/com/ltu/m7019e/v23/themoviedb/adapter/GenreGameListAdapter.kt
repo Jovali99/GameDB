@@ -48,7 +48,7 @@ class GenreGameListAdapter() : ListAdapter<Game, GenreGameListAdapter.ViewHolder
 
     class GenreGameListDiffCallback : DiffUtil.ItemCallback<Game>() {
         override fun areItemsTheSame(oldItem: Game, newItem: Game): Boolean {
-            return oldItem.appid == newItem.appid
+            return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(oldItem: Game, newItem: Game): Boolean {

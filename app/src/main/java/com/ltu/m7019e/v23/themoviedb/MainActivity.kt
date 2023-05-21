@@ -38,17 +38,17 @@ class MainActivity : AppCompatActivity() {
                 true
             }
 
-            R.id.action_genres -> {
+            R.id.action_platforms -> {
                 val navController = Navigation.findNavController(this,R.id.nav_host_fragment)
                 navController.navigate(R.id.SecondFragment)
                 true
             }
 
-            R.id.action_settings -> {
+           /* R.id.action_settings -> {
                 val navController = Navigation.findNavController(this,R.id.nav_host_fragment)
                 navController.navigate(R.id.SettingsFragment)
                 true
-            }
+            }*/
 
             else -> super.onOptionsItemSelected(item)
         }

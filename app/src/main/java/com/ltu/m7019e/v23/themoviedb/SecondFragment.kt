@@ -1,18 +1,15 @@
 package com.ltu.m7019e.v23.themoviedb
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.ltu.m7019e.v23.themoviedb.adapter.GenreListAdapter
+import com.ltu.m7019e.v23.themoviedb.adapter.PlatformListAdapter
 import com.ltu.m7019e.v23.themoviedb.databinding.FragmentSecondBinding
 import com.ltu.m7019e.v23.themoviedb.viewmodel.SecondFragmentViewModel
 import com.ltu.m7019e.v23.themoviedb.viewmodel.SecondFragmentViewModelFactory
@@ -42,14 +39,14 @@ class SecondFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(SecondFragmentViewModel::class.java)
 
         // Set up the RecyclerView
-        val adapter = GenreListAdapter()
+        val adapter = PlatformListAdapter()
         binding.genreListRv.adapter = adapter
 
         viewModel.genreList.observe(
             viewLifecycleOwner
-        ) { genreList ->
-            genreList?.let {
-                adapter.submitList(genreList)
+        ) { platformList ->
+            platformList?.let {
+                adapter.submitList(platformList)
             }
         }
 

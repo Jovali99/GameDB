@@ -29,7 +29,6 @@ class GameListViewModel(application: Application) : AndroidViewModel(application
 
     init {
         getGamesApiCall { gameList ->
-
             gameList?.forEach { gameInList ->
                 getGamesDetailsApiCall(gameInList.id) { game ->
 

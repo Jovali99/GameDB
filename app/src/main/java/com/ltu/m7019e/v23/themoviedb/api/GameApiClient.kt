@@ -25,21 +25,6 @@ class GameApiClient {
         retrofit.create(ApiService::class.java)
     }
 
-    private val apiService2: ApiService by lazy {
-        val gson = GsonBuilder()
-            .setLenient()
-            .create()
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://store.steampowered.com/")
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .build()
-        retrofit.create(ApiService::class.java)
-    }
-
-    // Print the complete URL string
-
-
-
     /*
     fun getGenres(subject: String, callback: (List<Genre>?, Throwable?) -> Unit) {
         apiService.getGenres(subject, apiKey = API_KEY).enqueue(object : Callback<ApiGenreResponse> {
@@ -114,7 +99,8 @@ class GameApiClient {
                 name = this.name ?: "",
                 description = this.description ?: "",
                 background_image = this.background_image ?: "",
-                rating=this.rating ?: null
+                rating=this.rating ?: null,
+                platforms = this.platforms ?: null
             )
         } else {
             null

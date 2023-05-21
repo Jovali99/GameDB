@@ -6,12 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.ListAdapter
-import com.ltu.m7019e.v23.themoviedb.databinding.GenreGameItemBinding
+import com.ltu.m7019e.v23.themoviedb.databinding.PlatformGameItemBinding
 import com.ltu.m7019e.v23.themoviedb.model.Game
 
-class GenreGameListAdapter() : ListAdapter<Game, GenreGameListAdapter.ViewHolder>(GenreGameListDiffCallback()) {
+class PlatformGameListAdapter() : ListAdapter<Game, PlatformGameListAdapter.ViewHolder>(GenreGameListDiffCallback()) {
 
-    class ViewHolder(private val binding: GenreGameItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(private val binding: PlatformGameItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
 
         fun bind(game: Game) {
@@ -21,7 +21,7 @@ class GenreGameListAdapter() : ListAdapter<Game, GenreGameListAdapter.ViewHolder
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = GenreGameItemBinding.inflate(layoutInflater, parent, false)
+                val binding = PlatformGameItemBinding.inflate(layoutInflater, parent, false)
                 return ViewHolder(binding)
             }
         }

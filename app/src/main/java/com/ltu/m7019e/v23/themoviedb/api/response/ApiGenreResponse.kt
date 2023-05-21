@@ -1,9 +1,9 @@
 package com.ltu.m7019e.v23.themoviedb.api.response
 
 import com.google.gson.annotations.SerializedName
-import com.ltu.m7019e.v23.themoviedb.model.Genre
+import com.ltu.m7019e.v23.themoviedb.model.Platform
 
-data class ApiGenreResponse(
+data class ApiPlatformResponse(
     @SerializedName("genres")
-    val genres: List<Genre>
+    val platform: List<Platform>
 )

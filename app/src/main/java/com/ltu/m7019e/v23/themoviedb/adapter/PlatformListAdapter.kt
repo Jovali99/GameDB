@@ -6,33 +6,33 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.ltu.m7019e.v23.themoviedb.model.Genre
-import com.ltu.m7019e.v23.themoviedb.databinding.GenreItemListBinding
 import androidx.recyclerview.widget.ListAdapter
 import com.ltu.m7019e.v23.themoviedb.R
+import com.ltu.m7019e.v23.themoviedb.databinding.PlatformItemListBinding
+import com.ltu.m7019e.v23.themoviedb.model.Platform
 
-class GenreListAdapter() : ListAdapter<Genre, GenreListAdapter.ViewHolder>(GenreListDiffCallback()) {
+class PlatformListAdapter() : ListAdapter<Platform, PlatformListAdapter.ViewHolder>(GenreListDiffCallback()) {
 
-    class ViewHolder(private val binding: GenreItemListBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(private val binding: PlatformItemListBinding) : RecyclerView.ViewHolder(binding.root) {
 
         private val genreGameListRV: RecyclerView
-        val genreGameListAdapter: GenreGameListAdapter
+        val platformGameListAdapter: PlatformGameListAdapter
         init {
             val context = itemView.context
             genreGameListRV = itemView.findViewById(R.id.genre_game_list_rv)
             genreGameListRV?.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            genreGameListAdapter = GenreGameListAdapter()
-            genreGameListRV.adapter = genreGameListAdapter
+            platformGameListAdapter = PlatformGameListAdapter()
+            genreGameListRV.adapter = platformGameListAdapter
         }
 
-        fun bind(genre: Genre) {
-            binding.genreName.text = genre.description
+        fun bind(platform: Platform) {
+            binding.genreName.text = platform.platform?.name
         }
 
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = GenreItemListBinding.inflate(layoutInflater, parent, false)
+                val binding = PlatformItemListBinding.inflate(layoutInflater, parent, false)
                 return ViewHolder(binding)
             }
         }
@@ -43,10 +43,10 @@ class GenreListAdapter() : ListAdapter<Genre, GenreListAdapter.ViewHolder>(Genre
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val genre = getItem(position)
-        if (genre != null) {
-            holder.genreGameListAdapter.submitList(genre.gameList)
-            holder.bind(genre)
+        val platform = getItem(position)
+        if (platform != null) {
+            holder.platformGameListAdapter.submitList(platform.platform?.gameList)
+            holder.bind(platform)
         }
     }
 
@@ -56,12 +56,12 @@ class GenreListAdapter() : ListAdapter<Genre, GenreListAdapter.ViewHolder>(Genre
         return count
     }
 
-    class GenreListDiffCallback : DiffUtil.ItemCallback<Genre>() {
-        override fun areItemsTheSame(oldItem: Genre, newItem: Genre): Boolean {
-            return oldItem.id == newItem.id
+    class GenreListDiffCallback : DiffUtil.ItemCallback<Platform>() {
+        override fun areItemsTheSame(oldItem: Platform, newItem: Platform): Boolean {
+            return oldItem.platform?.name == newItem.platform?.name
         }
 
-        override fun areContentsTheSame(oldItem: Genre, newItem: Genre): Boolean {
+        override fun areContentsTheSame(oldItem: Platform, newItem: Platform): Boolean {
             return oldItem == newItem
         }
 

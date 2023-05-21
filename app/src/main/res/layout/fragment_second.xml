@@ -6,7 +6,7 @@
     <data>
         <variable
             name="genres"
-            type="com.ltu.m7019e.v23.themoviedb.database.Genres" />
+            type="com.ltu.m7019e.v23.themoviedb.database.Platforms" />
     </data>
 
     <FrameLayout
@@ -30,7 +30,8 @@
             android:text="@string/previous"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:rippleColor="#9E0000" />
     </FrameLayout>
 
 </layout>

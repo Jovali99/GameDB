@@ -54,12 +54,6 @@ data class MetaCriticPlatform(
     val platform: Platform? = null
 )
 
-data class Platform(
-    val platform: Platform? = null,
-    val name: String? = null,
-    val slug: String? = null
-)
-
 data class Rating(
     val id: Int? = null,
     val title: String? = null,

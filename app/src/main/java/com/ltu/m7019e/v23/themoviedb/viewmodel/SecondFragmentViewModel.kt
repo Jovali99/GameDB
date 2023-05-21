@@ -12,14 +12,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.ltu.m7019e.v23.themoviedb.R
 import com.ltu.m7019e.v23.themoviedb.api.GameApiClient
+import com.ltu.m7019e.v23.themoviedb.database.Platforms
 import com.ltu.m7019e.v23.themoviedb.model.Game
-import com.ltu.m7019e.v23.themoviedb.model.Genre
+import com.ltu.m7019e.v23.themoviedb.model.Platform
 
 class SecondFragmentViewModel (application: Application) : AndroidViewModel(application){
     private val _gameList = MutableLiveData<List<Game>>()
-    private val _genreList = MutableLiveData<List<Genre>>()
+    private val _platformList = MutableLiveData<List<Platform>>()
 
-    val gameList: LiveData<List<Game>>
+    val platformList: LiveData<List<Game>>
         get() {
             return _gameList
         }
@@ -30,21 +31,41 @@ class SecondFragmentViewModel (application: Application) : AndroidViewModel(appl
             return _navigateToGameDetail
         }
 
-    val genreList: LiveData<List<Genre>>
+    val genreList: LiveData<List<Platform>>
         get() {
-            return _genreList
+            return _platformList
         }
 
 
 
     init {
-
+        var listOfPlatforms = Platforms()
+        
         getGamesApiCall { gameList ->
-            Log.d("game_-list", "gamelist after api: " + gameList)
 
-            /*gameList.forEach { gameInList ->
+            Log.d("game-list", "gamelist after api: " + gameList?.elementAt(2)?.platforms)
+            gameList?.forEach { gameInList ->
+                //Log.d("platform--", "game platformsss: " + gameInList.platforms)
+                gameInList.platforms?.forEach { gamesPlatform ->
+                    //Log.d("platform--", "game platforms: " + gamesPlatform)
+                    listOfPlatforms.list.forEach { platform ->
+                        Log.d("platform--", "platform: " + platform?.platform?.name)
+                        Log.d("platform--", "game platform: " + gamesPlatform)
+                        if (platform.platform?.name.equals(gamesPlatform.platform?.name)) {
+                            Log.d("platform--", "add game to platform: " + platform.platform?.name)
+                            Log.d("platform--", "add game to platform: " + gamesPlatform.platform?.name)
+                            Log.d("platform--", "game to add: " + gameInList)
+                            platform.platform?.gameList?.add(gameInList)
+                        }
+                    }
+                    
+                }
+            }
+            Log.d("platform", "after platform games are added: " + listOfPlatforms.list?.elementAt(0)?.platform?.gameList)
+            _platformList.postValue(listOfPlatforms.list)
+        }
 
-                Log.d("game_details", "Before game detail api call: " + gameInList.id)
+
                 /*getGamesDetailsApiCall(gameInList.id) { game ->
                     if (game != null) {
                         game.forEach { gameDetailList ->
@@ -55,19 +76,15 @@ class SecondFragmentViewModel (application: Application) : AndroidViewModel(appl
                             )
                         }
                     }
-                }*/
-            }*/
+                }
+            }
             //_gameList.postValue(gameList)
-
 
 //            val genreGame = gameList.filter { it.game_genres.contains(genre.id)}
 //            var listOfGenres = mutableListOf<Genre>()
 //            listOfGenres.add(genre)
 //            _genreList.postValue(listOfGenres) todo genres
-
-
-
-        }
+        }*/
     }
 
     fun onGameListItemClicked(game: Game) {
@@ -91,18 +108,6 @@ class SecondFragmentViewModel (application: Application) : AndroidViewModel(appl
             }
         }
     }
-
-//    private fun getGenresApiCall(callback: (List<Genre>) -> Unit) {
-//        val gameApiClient = GameApiClient()
-//        gameApiClient.getGenres { genreList, error ->
-//            if (error != null ) {
-//                Log.d("error_game_list", "game list error : " + error)
-//            } else if (genreList != null) {
-//                Log.d("getGenres", "add genres to list: " + genreList)
-//                callback(genreList)
-//            }
-//        }
-//    }
 
     /*private fun getGamesDetailsApiCall(id: Int?, callback: (List<Game>?) -> Unit) {
         val gameApiClient = GameApiClient()

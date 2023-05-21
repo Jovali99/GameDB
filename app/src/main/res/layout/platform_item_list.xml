@@ -6,7 +6,7 @@
 
         <variable
             name="genres"
-            type="com.ltu.m7019e.v23.themoviedb.database.Genres" />
+            type="com.ltu.m7019e.v23.themoviedb.database.Platforms" />
     </data>
 
     <FrameLayout

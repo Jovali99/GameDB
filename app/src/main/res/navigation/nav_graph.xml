@@ -33,9 +33,9 @@
     </fragment>
     <fragment
         android:id="@+id/SettingsFragment"
-        android:name="com.ltu.m7019e.v23.themoviedb.SettingsFragment"
+        android:name="com.ltu.m7019e.v23.themoviedb.gameDetailsFragment"
         android:label="@string/settings_fragment_label"
-        tools:layout="@layout/fragment_settings">
+        tools:layout="@layout/fragment_game_details">
 
         <action
             android:id="@+id/action_SettingsFragment_to_FirstFragment"

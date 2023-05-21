@@ -1,7 +1,7 @@
 package com.ltu.m7019e.v23.themoviedb.api
 
-import com.ltu.m7019e.v23.themoviedb.api.response.ApiGenreResponse
 import com.ltu.m7019e.v23.themoviedb.api.response.ApiGameResponse
+import com.ltu.m7019e.v23.themoviedb.api.response.ApiPlatformResponse
 import com.ltu.m7019e.v23.themoviedb.api.response.ApiPopularGamesListResponse
 import retrofit2.Call
 import retrofit2.http.GET
@@ -28,6 +28,6 @@ interface ApiService {
     fun getGenres(
         @Path("subject") subject: String,
         @Query("key") apiKey: String
-    ): Call<ApiGenreResponse>
+    ): Call<ApiPlatformResponse>
 
 }

@@ -1,11 +1,14 @@
 package com.ltu.m7019e.v23.themoviedb
 
+import android.content.Context
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebViewClient
 import android.widget.MediaController
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -46,22 +49,21 @@ class GameDetailsFragment : Fragment() {
         binding.viewModel = viewModel
 
 
-        playVideoFromUrl("https://www.youtube.com/watch?v=7gL9mopbm3Y", binding)
-
+        //playVideoFromUrl("https://www.youtube.com/watch?v=7gL9mopbm3Y")
+        playVideoFromUrl("https:/steamcdn-a.akamaihd.net/steam/apps/256683844/movie480.mp4")
 
         return binding.root
         //return inflater.inflate(R.layout.fragment_game_details, container, false)
     }
 
-    private fun playVideoFromUrl(videoUrl: String, binding: FragmentGameDetailsBinding, ) {
+    private fun playVideoFromUrl(videoUrl: String) {
         val videoView = binding.videoView
-        videoView.setVideoPath(videoUrl) // Set the video URL
 
-        val mediaController = MediaController(requireContext())
-        videoView.setMediaController(mediaController)
+        videoView.webViewClient = WebViewClient()
+        videoView.settings.javaScriptEnabled = true
 
-        videoView.setOnPreparedListener {
-            videoView.start() // Start playing the video
-        }
+        // Load a web page
+        videoView.loadUrl(videoUrl)
+
     }
 }

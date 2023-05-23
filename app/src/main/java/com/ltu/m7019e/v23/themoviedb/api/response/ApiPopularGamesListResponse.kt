@@ -7,7 +7,3 @@ data class ApiPopularGamesListResponse(
     val results: List<Game>?
 
 )
-
-/*data class AppList(
-    val apps: List<Game>? = null
-)*/

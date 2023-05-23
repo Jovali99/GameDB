@@ -88,22 +88,4 @@ class SecondFragmentViewModel (application: Application) : AndroidViewModel(appl
         }
     }
 
-    /*private fun getGamesDetailsApiCall(id: Int?, callback: (List<Game>?) -> Unit) {
-        val gameApiClient = GameApiClient()
-        gameApiClient.getGameDetails(id) { game, error ->
-            if (error != null ) {
-                Log.d("error_game_details", "game_details error : " + error)
-            } else if (game != null) {
-                Log.d("game_details", "add game_details: " + game)
-                callback(game)
-            }
-        }
-    }*/
-
-    fun on_imdb_click(context: Context, popUp: AlertDialog, imdb_link: String) {
-        popUp.findViewById<FrameLayout>(R.id.imdb_logo_link)?.setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(imdb_link))
-            context.startActivity(intent)
-        }
-    }
 }

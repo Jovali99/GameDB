@@ -1,6 +1,7 @@
 package com.ltu.m7019e.v23.themoviedb.api
 
 import com.ltu.m7019e.v23.themoviedb.api.response.ApiGameResponse
+import com.ltu.m7019e.v23.themoviedb.api.response.ApiGameTrailerResponse
 import com.ltu.m7019e.v23.themoviedb.api.response.ApiPlatformResponse
 import com.ltu.m7019e.v23.themoviedb.api.response.ApiPopularGamesListResponse
 import retrofit2.Call
@@ -24,10 +25,10 @@ interface ApiService {
         @Query("key") apiKey: String
     ): Call<ApiPopularGamesListResponse>
 
-    @GET("genres")              //Fetch subjects
-    fun getGenres(
-        @Path("subject") subject: String,
+    @GET("games/{id}/movies")              //Fetch subjects
+    fun getGameTrailer(
+        @Path("id") id: String?,
         @Query("key") apiKey: String
-    ): Call<ApiPlatformResponse>
+    ): Call<ApiGameTrailerResponse>
 
 }

@@ -48,7 +48,8 @@ data class Game(
     val additions_count: Int? = null,
     val game_series_count: Int? = null,
     val esrb_rating: EsrbRating? = null,
-    val platforms: List<Platform>? = null
+    val platforms: List<Platform>? = null,
+    val gameTrailer: String? = null
 ) : Parcelable
 
 @Parcelize

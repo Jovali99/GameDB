@@ -18,20 +18,20 @@ import com.ltu.m7019e.v23.themoviedb.model.Game
 
 class GameDetailViewModel(application: Application, game: Game) : AndroidViewModel(application) {
     init {
-        //getGamesApiCall { gameList ->
-
+        getGameTrailer(game.id) { gameTrailerString ->
+            Log.d("gameTrailer", "gameTrailerString : " + gameTrailerString)
             //_gameList.postValue(gameList)
-        //}
+        }
     }
 
-    private fun getGamesApiCall(callback: (List<Game>?) -> Unit) {
+    private fun getGameTrailer(id: Int?, callback: (String?) -> Unit) {
         val gameApiClient = GameApiClient()
-        gameApiClient.getGames() { gameList, error ->
+        gameApiClient.getGameTrailer(id.toString()) { trailerString, error ->
             if (error != null ) {
-                Log.d("error_game_list", "game list error : " + error)
-            } else if (gameList != null) {
-                Log.d("game_list", "add games to list: " + gameList)
-                callback(gameList)
+                Log.d("gameTrailer", "gameTrailer error : " + error)
+            } else if (trailerString != null) {
+                Log.d("gameTrailer", "gameTrailer to string: " + trailerString)
+                callback(trailerString)
             }
         }
     }

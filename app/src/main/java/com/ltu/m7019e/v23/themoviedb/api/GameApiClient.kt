@@ -3,6 +3,7 @@ package com.ltu.m7019e.v23.themoviedb.api
 import android.util.Log
 import com.google.gson.GsonBuilder
 import com.ltu.m7019e.v23.themoviedb.api.response.ApiGameResponse
+import com.ltu.m7019e.v23.themoviedb.api.response.ApiGameTrailerResponse
 import com.ltu.m7019e.v23.themoviedb.api.response.ApiPopularGamesListResponse
 import com.ltu.m7019e.v23.themoviedb.model.Game
 import retrofit2.Call
@@ -46,6 +47,27 @@ class GameApiClient {
             }
         })
     }*/
+
+    fun getGameTrailer(id: String?, callback: (String?, Throwable?) -> Unit) {
+        apiService1.getGameTrailer(id, apiKey = API_KEY).enqueue(object : Callback<ApiGameTrailerResponse> {
+            override fun onResponse(call: Call<ApiGameTrailerResponse>, response: Response<ApiGameTrailerResponse>) {
+                if (response.isSuccessful) {
+                    Log.d("gameTrailer", "api response success: "+ response)
+                    val apiGameTrailersResponse = response.body()
+                    Log.d("gameTrailer", "api response body: "+ apiGameTrailersResponse)
+                    //val trailerUrl = apiGameTrailersResponse?.preview
+                    //callback(trailerUrl,null)
+                } else {
+                    Log.d("gameTrailer", "api response fail: "+ response)
+                    callback(null, Throwable(response.message()))
+                }
+            }
+            override fun onFailure(call: Call<ApiGameTrailerResponse>, t: Throwable) {
+                Log.d("gameTrailer", "api response fail2: "+ t)
+                callback(null, t)
+            }
+        })
+    }
 
     fun getGames(sort: String = SORT, apiKey: String =API_KEY, callback: (List<Game>?, Throwable?) -> Unit) {
         apiService1.getGames(sort, apiKey).enqueue(object : Callback<ApiPopularGamesListResponse> {

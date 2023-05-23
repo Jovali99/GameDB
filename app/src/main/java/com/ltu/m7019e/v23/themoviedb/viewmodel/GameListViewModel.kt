@@ -34,7 +34,14 @@ class GameListViewModel(application: Application) : AndroidViewModel(application
 
                     if (game != null) {
                         Log.d("game_list_details", "game details b4: " + gameInList)
-                        gameInList.description = game.description
+                        var desc = game.description?.replace("<p>", "")
+                        desc = desc?.replace("</p>", "")
+                        desc = desc?.replace("<br>", "")
+                        desc = desc?.replace("</br>", "")
+                        desc = desc?.replace("<br>", "")
+                        desc = desc?.replace("<br />", "")
+                        gameInList.description = desc
+
                         //gameInList.genres = game.genres
                         Log.d("game_list_details", "game details after: " + gameInList)
                     }
@@ -77,13 +84,6 @@ class GameListViewModel(application: Application) : AndroidViewModel(application
                 Log.d("game_details", "add game_details: " + game)
                 callback(game)
             }
-        }
-    }
-
-    fun on_imdb_click(context: Context, popUp: AlertDialog, imdb_link: String) {
-        popUp.findViewById<FrameLayout>(R.id.imdb_logo_link)?.setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(imdb_link))
-            context.startActivity(intent)
         }
     }
 }

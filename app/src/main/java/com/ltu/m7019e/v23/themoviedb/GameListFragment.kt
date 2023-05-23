@@ -7,12 +7,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.MediaController
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.ltu.m7019e.v23.themoviedb.adapter.GameListAdapter
 import com.ltu.m7019e.v23.themoviedb.adapter.GameListClickListener
 import com.ltu.m7019e.v23.themoviedb.databinding.FragmentGameListBinding
+import com.ltu.m7019e.v23.themoviedb.model.Platform
 import com.ltu.m7019e.v23.themoviedb.viewmodel.GameListViewModel
 import com.ltu.m7019e.v23.themoviedb.viewmodel.GameListViewModelFactory
 
@@ -58,7 +61,12 @@ class GameListFragment : Fragment() {
 
         viewModel.navigateToGameDetail.observe(viewLifecycleOwner) { game ->
             game?.let{
+                this.findNavController().navigate(
+                    GameListFragmentDirections.actionGameListFragmentToGameDetailsFragment(game)
 
+                )
+                viewModel.onGameDetailNavigated()
+                /*
                 val builder = AlertDialog.Builder(requireContext())
                 val popupView = LayoutInflater.from(requireContext()).inflate(R.layout.game_info_popup, null)
                 builder.setView(popupView)
@@ -68,9 +76,7 @@ class GameListFragment : Fragment() {
                 dialog.show()
 
                 //viewModel.on_imdb_click(requireContext(), dialog, movie.imdb_link) todo correct click
-
-
-                viewModel.onGameDetailNavigated()
+                viewModel.onGameDetailNavigated()*/
             }
         }
 
@@ -80,23 +86,5 @@ class GameListFragment : Fragment() {
     @SuppressLint("ResourceType")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        /*
-        val movies = Movies()
-
-        val movieList = view.findViewById<LinearLayout>(R.id.movie_list_ll)
-        val movieItem = movieList.findViewById<View>(R.layout.movie_list_item)
-        val movieTitle = movieItem.findViewById<TextView>(R.id.movie_title)
-        val moviePoster = movieItem.findViewById<ImageView>(R.id.movie_poster)
-
-        movieTitle.text = movies.list[0].title
-        Glide
-            .with(this)
-            .load(Contants.POSTER_IMAGE_BASE_URL + Contants.POSTER_IMAGE_WIDTH + movies.list[0].poster_path)
-            .into(moviePoster);
-
-
-        view.findViewById<Button>(R.id.button).setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-        }*/
     }
 }

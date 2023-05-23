@@ -16,6 +16,8 @@ class PlatformGameListAdapter() : ListAdapter<Game, PlatformGameListAdapter.View
 
         fun bind(game: Game) {
             binding.game = game
+            //binding.clickListener = platformGameListClickListener
+            binding.executePendingBindings()
         }
 
         companion object {
@@ -33,9 +35,7 @@ class PlatformGameListAdapter() : ListAdapter<Game, PlatformGameListAdapter.View
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val game = getItem(position)
-        if (game != null) {
-            holder.bind(game)
-        }
+        holder.bind(game)
     }
 
     override fun getItemCount(): Int {
@@ -43,8 +43,6 @@ class PlatformGameListAdapter() : ListAdapter<Game, PlatformGameListAdapter.View
         Log.d("rec_test", "getItemCount: count = $count")
         return count
     }
-
-
 
     class GenreGameListDiffCallback : DiffUtil.ItemCallback<Game>() {
         override fun areItemsTheSame(oldItem: Game, newItem: Game): Boolean {
@@ -56,3 +54,7 @@ class PlatformGameListAdapter() : ListAdapter<Game, PlatformGameListAdapter.View
         }
     }
 }
+class PlatformGameListClickListener(val clickListener: (game: Game) -> Unit) {
+    fun onClick(game: Game) = clickListener(game)
+}
+

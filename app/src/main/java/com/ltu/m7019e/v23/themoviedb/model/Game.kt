@@ -1,7 +1,10 @@
 package com.ltu.m7019e.v23.themoviedb.model
+import android.os.Parcelable
+import com.squareup.moshi.Json
+import kotlinx.parcelize.Parcelize
+import kotlinx.parcelize.RawValue
 
-import com.google.gson.annotations.SerializedName
-
+@Parcelize
 data class Game(
     val id: Int? = null,
     val slug: String? = null,
@@ -22,7 +25,7 @@ data class Game(
     val ratings: List<Rating>? = null,
     val reactions: Map<String, Int>? = null,
     val added: Int? = null,
-    val added_by_status: Map<String, Any>? = null,
+    val added_by_status: Map<String, Int>? = null,
     val playtime: Int? = null,
     val screenshots_count: Int? = null,
     val movies_count: Int? = null,
@@ -46,25 +49,26 @@ data class Game(
     val game_series_count: Int? = null,
     val esrb_rating: EsrbRating? = null,
     val platforms: List<Platform>? = null
-)
+) : Parcelable
 
+@Parcelize
 data class MetaCriticPlatform(
     val metascore: Int? = null,
     val url: String? = null,
     val platform: Platform? = null
-)
-
+): Parcelable
+@Parcelize
 data class Rating(
     val id: Int? = null,
     val title: String? = null,
     val count: Int? = null,
     val percent: Double? = null
-)
-
+): Parcelable
+@Parcelize
 data class EsrbRating(
     val id: Int? = null,
     val slug: String? = null,
     val name: String? = null
-)
+): Parcelable
 
 

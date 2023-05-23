@@ -11,7 +11,7 @@
 
         <variable
             name="clickListener"
-            type="com.ltu.m7019e.v23.themoviedb.adapter.GameListClickListener" />
+            type="com.ltu.m7019e.v23.themoviedb.adapter.PlatformGameListClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

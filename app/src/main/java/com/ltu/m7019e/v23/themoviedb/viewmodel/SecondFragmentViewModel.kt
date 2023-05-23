@@ -64,27 +64,6 @@ class SecondFragmentViewModel (application: Application) : AndroidViewModel(appl
             Log.d("platform", "after platform games are added: " + listOfPlatforms.list?.elementAt(0)?.platform?.gameList)
             _platformList.postValue(listOfPlatforms.list)
         }
-
-
-                /*getGamesDetailsApiCall(gameInList.id) { game ->
-                    if (game != null) {
-                        game.forEach { gameDetailList ->
-                            gameInList.description = gameDetailList.description
-                            Log.d(
-                                "game_details",
-                                "Inside game detail api call: " + gameInList.description
-                            )
-                        }
-                    }
-                }
-            }
-            //_gameList.postValue(gameList)
-
-//            val genreGame = gameList.filter { it.game_genres.contains(genre.id)}
-//            var listOfGenres = mutableListOf<Genre>()
-//            listOfGenres.add(genre)
-//            _genreList.postValue(listOfGenres) todo genres
-        }*/
     }
 
     fun onGameListItemClicked(game: Game) {

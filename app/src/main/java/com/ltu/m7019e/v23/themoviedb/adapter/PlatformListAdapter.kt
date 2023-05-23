@@ -9,19 +9,25 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.ListAdapter
 import com.ltu.m7019e.v23.themoviedb.R
 import com.ltu.m7019e.v23.themoviedb.databinding.PlatformItemListBinding
+import com.ltu.m7019e.v23.themoviedb.model.Game
 import com.ltu.m7019e.v23.themoviedb.model.Platform
+import com.ltu.m7019e.v23.themoviedb.viewmodel.SecondFragmentViewModel
 
 class PlatformListAdapter() : ListAdapter<Platform, PlatformListAdapter.ViewHolder>(GenreListDiffCallback()) {
 
     class ViewHolder(private val binding: PlatformItemListBinding) : RecyclerView.ViewHolder(binding.root) {
 
         private val genreGameListRV: RecyclerView
-        val platformGameListAdapter: PlatformGameListAdapter
+
+
+        //val platformGameListClickListener: PlatformGameListClickListener
+        val platformGameListAdapter = PlatformGameListAdapter()
+
         init {
             val context = itemView.context
             genreGameListRV = itemView.findViewById(R.id.genre_game_list_rv)
             genreGameListRV?.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            platformGameListAdapter = PlatformGameListAdapter()
+            //platformGameListAdapter = PlatformGameListAdapter(platformGameListClickListener)
             genreGameListRV.adapter = platformGameListAdapter
         }
 
@@ -47,6 +53,7 @@ class PlatformListAdapter() : ListAdapter<Platform, PlatformListAdapter.ViewHold
         if (platform != null) {
             holder.platformGameListAdapter.submitList(platform.platform?.gameList)
             holder.bind(platform)
+
         }
     }
 

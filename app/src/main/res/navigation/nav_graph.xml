@@ -3,21 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/GameListFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
+        android:id="@+id/GameListFragment"
         android:name="com.ltu.m7019e.v23.themoviedb.GameListFragment"
-        android:label="@string/first_fragment_label"
+        android:label="@string/GameList_fragment_label"
         tools:layout="@layout/fragment_game_list">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            android:id="@+id/action_GameListFragment_to_SecondFragment"
             app:destination="@id/SecondFragment" />
         <action
-            android:id="@+id/action_FirstFragment_to_SettingsFragment"
-            app:destination="@id/SettingsFragment" />
+            android:id="@+id/action_GameListFragment_to_GameDetailsFragment"
+            app:destination="@id/GameDetailsFragment" />
+
     </fragment>
+
     <fragment
         android:id="@+id/SecondFragment"
         android:name="com.ltu.m7019e.v23.themoviedb.SecondFragment"
@@ -25,23 +27,28 @@
         tools:layout="@layout/fragment_second">
 
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_SecondFragment_to_GameListFragment"
+            app:destination="@id/GameListFragment" />
         <action
-            android:id="@+id/action_SecondFragment_to_SettingsFragment"
-            app:destination="@id/SettingsFragment" />
+            android:id="@+id/action_SecondFragment_to_GameDetailsFragment"
+            app:destination="@id/GameDetailsFragment" />
     </fragment>
+
     <fragment
-        android:id="@+id/SettingsFragment"
-        android:name="com.ltu.m7019e.v23.themoviedb.gameDetailsFragment"
-        android:label="@string/settings_fragment_label"
+        android:id="@+id/GameDetailsFragment"
+        android:name="com.ltu.m7019e.v23.themoviedb.GameDetailsFragment"
+        android:label="@string/gameDetails_fragment_label"
         tools:layout="@layout/fragment_game_details">
 
         <action
-            android:id="@+id/action_SettingsFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_GameDetailsFragment_to_GameListFragment"
+            app:destination="@id/GameListFragment" />
         <action
-            android:id="@+id/action_SettingsFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_GameDetailsFragment_to_SecondFragment"
+            app:destination="@id/SecondFragment"/>
+        <argument
+            android:name="game"
+            app:argType="com.ltu.m7019e.v23.themoviedb.model.Game" />
+
     </fragment>
 </navigation>

@@ -9,7 +9,7 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.ltu.m7019e.v23.themoviedb.adapter.PlatformListAdapter
+import com.ltu.m7019e.v23.themoviedb.adapter.*
 import com.ltu.m7019e.v23.themoviedb.databinding.FragmentSecondBinding
 import com.ltu.m7019e.v23.themoviedb.viewmodel.SecondFragmentViewModel
 import com.ltu.m7019e.v23.themoviedb.viewmodel.SecondFragmentViewModelFactory
@@ -38,7 +38,11 @@ class SecondFragment : Fragment() {
         viewModelFactory = SecondFragmentViewModelFactory(application)
         viewModel = ViewModelProvider(this, viewModelFactory).get(SecondFragmentViewModel::class.java)
 
+
         // Set up the RecyclerView
+        //binding.genreGameListRv.adapter = platformGameListAdapter
+
+
         val adapter = PlatformListAdapter()
         binding.genreListRv.adapter = adapter
 
@@ -50,6 +54,15 @@ class SecondFragment : Fragment() {
             }
         }
 
+
+        viewModel.navigateToGameDetail.observe(viewLifecycleOwner) { game ->
+            game?.let {
+                this.findNavController().navigate(
+                    GameListFragmentDirections.actionGameListFragmentToGameDetailsFragment(game)
+                )
+                viewModel.onGameDetailNavigated()
+            }
+        }
         /*
         viewModel.navigateToMovieDetail.observe(viewLifecycleOwner) { movie ->
             movie?.let{
@@ -78,7 +91,7 @@ class SecondFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         view.findViewById<Button>(R.id.button_second).setOnClickListener {
-            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+            findNavController().navigate(R.id.action_SecondFragment_to_GameListFragment)
         }
 
     }
